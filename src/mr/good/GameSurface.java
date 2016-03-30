@@ -6,7 +6,10 @@
 package mr.good;
 
 import environment.Environment;
+import grid.Grid;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -15,6 +18,16 @@ import java.awt.event.MouseEvent;
  * @author samuelmartinezdelcampo
  */
 public class GameSurface extends Environment {
+    
+    private Grid grid;
+    
+    
+    
+    
+    public GameSurface() {
+        
+        grid = new Grid(30, 25, 20, 20, new Point(0,0), new Color(220, 220, 220));
+    }
 
     @Override
     public void initializeEnvironment() {
@@ -38,6 +51,10 @@ public class GameSurface extends Environment {
 
     @Override
     public void paintEnvironment(Graphics graphics) {
+        
+        if (grid != null) {
+            grid.paintComponent(graphics);
+        }
     }
     
 }
