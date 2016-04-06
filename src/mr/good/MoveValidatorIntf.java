@@ -5,10 +5,14 @@
  */
 package mr.good;
 
+import java.awt.Point;
+
 /**
  *
  * @author Lauchlan
  */
 interface MoveValidatorIntf {
+
+    public Point validateMove(Point newHead);
     
 }

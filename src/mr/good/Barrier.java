@@ -15,22 +15,18 @@ import java.awt.Point;
  */
 class Barrier {
 
-//    Barrier(int i, int i0, Color GREEN, GameSurface aThis, CellDataProviderIntf cellData) {
-//    }
-
-
     public void draw(Graphics graphics) {
-        graphics.setColor(Color.BLACK);
-        graphics.fill3DRect(cellData.getSystemCoordX(x, y),
-                cellData.getSystemCoordY(x, y),
-                cellData.getCellWidth(),
-                cellData.getCellHeight(), true);
+        graphics.setColor(this.color);
+        graphics.fill3DRect(cellData.getSystemCoordX(column, row),
+                            cellData.getSystemCoordY(column, row),
+                            cellData.getCellWidth(),
+                            cellData.getCellHeight(), true);
     }
 
 //<editor-fold defaultstate="collapsed" desc="Constructors">
-    public Barrier(int x, int y, Color color, GameSurface aThis, CellDataProviderIntf cellData) {
-        this.x = x;
-        this.y = y;
+    public Barrier(int column, int row, Color color, CellDataProviderIntf cellData) {
+        this.column = column;
+        this.row = row;
 
         this.color = color;
         this.cellData = cellData;
@@ -38,7 +34,7 @@ class Barrier {
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="Properties">
-    private int x, y;
+    private int column, row;
     private Color color;
     private CellDataProviderIntf cellData;
 
@@ -46,35 +42,35 @@ class Barrier {
      * @return the point of the cell location
      */
     public Point getLocation() {
-        return new Point(x, y);
+        return new Point(column, row);
     }
 
     /**
-     * @return the x
+     * @return the column
      */
     public int getX() {
-        return x;
+        return column;
     }
 
     /**
-     * @param x the x to set
+     * @param x the column to set
      */
     public void setX(int x) {
-        this.x = x;
+        this.column = x;
     }
 
     /**
-     * @return the y
+     * @return the row
      */
     public int getY() {
-        return y;
+        return row;
     }
 
     /**
-     * @param y the y to set
+     * @param y the row to set
      */
     public void setY(int y) {
-        this.y = y;
+        this.row = y;
     }
 
     /**

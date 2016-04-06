@@ -9,12 +9,7 @@ package mr.good;
  *
  * @author Lauchlan
  */
-public interface CellDataProviderIntf {
+public enum Direction {
+    LEFT,RIGHT, UP, DOWN;
     
-    public int getCellWidth();
-    public int getCellHeight();
-    
-    public int getSystemCoordX(int column, int row);
-    public int getSystemCoordY(int column, int row);
-        
 }

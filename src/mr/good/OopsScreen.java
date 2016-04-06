@@ -9,12 +9,7 @@ package mr.good;
  *
  * @author Lauchlan
  */
-public interface CellDataProviderIntf {
+public enum OopsScreen {
+    START, PLAY, GAMEOVER;
     
-    public int getCellWidth();
-    public int getCellHeight();
-    
-    public int getSystemCoordX(int column, int row);
-    public int getSystemCoordY(int column, int row);
-        
 }
