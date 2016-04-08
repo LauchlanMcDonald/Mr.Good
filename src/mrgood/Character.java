@@ -3,13 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mr.good;
+package mrgood;
+
+import grid.Grid;
+import images.ResourceTools;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
  * @author Lauchlan
  */
-public enum Direction {
-    LEFT,RIGHT, UP, DOWN;
+public class Character {
+
     
 }
