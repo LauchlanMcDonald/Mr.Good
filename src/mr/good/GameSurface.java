@@ -39,7 +39,7 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     public GameSurface() {
         Health = 100;
-        grid = new Grid(7, 7, 75, 75, new Point(50, 50), new Color(220, 220, 220));
+        grid = new Grid(7, 7, 60, 60, new Point(50, 50), new Color(220, 220, 220));
 //        barrier = new Barrier(0, 0, Color.BLACK, this);
         
         
