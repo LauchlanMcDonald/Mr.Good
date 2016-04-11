@@ -42,9 +42,9 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         Health = 100;
         grid = new Grid(7, 7, 60, 60, new Point(50, 50), new Color(220, 220, 220));
 
-        startscreen = ResourceTools.loadImageFromResource("mrgood/MrGoodStartscreen.jpg");
+        startscreen = ResourceTools.loadImageFromResource("mrgood/boulderuphill.jpg");
 
-        Color translucentGrey = new Color(64, 64, 64, 100);
+        Color translucentGrey = new Color(64, 64, 64, 150);
 
         barriers = new ArrayList<>();
         for (int column = 0; column < grid.getColumns(); column++) {
@@ -78,6 +78,9 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
     @Override
     public void keyPressedHandler(KeyEvent e) {
 
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            screen = Screen.PLAY;
+        }
     }
 
     @Override
@@ -102,11 +105,23 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
         switch (screen) {
             case START:
-                graphics.setFont(new Font("ARIAL", Font.BOLD, 40));
+                graphics.setFont(new Font("ARIAL", Font.BOLD, 25));
                 graphics.drawImage(startscreen, 0, 0, 900, 580, this);
-                graphics.drawString("PRESS SPACE TO START", 215, 550);
+                graphics.drawString("PRESS SPACE TO START", 475, 515);
 
                 break;
+
+            case PLAY:
+
+                if (grid != null) {
+                    grid.paintComponent(graphics);
+                }
+
+                if (barriers != null) {
+                    for (int i = 0; i < barriers.size(); i++) {
+                        barriers.get(i).draw(graphics);
+                    }
+                }
 
         }
 
@@ -123,17 +138,20 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
     }
 
     @Override
-    public int getSystemCoordX(int column, int row) {
+    public int getSystemCoordX(int column, int row
+    ) {
         return grid.getCellSystemCoordinate(column, row).x;
     }
 
     @Override
-    public int getSystemCoordY(int column, int row) {
+    public int getSystemCoordY(int column, int row
+    ) {
         return grid.getCellSystemCoordinate(column, row).y;
     }
 
     @Override
-    public Point validateMove(Point newHead) {
+    public Point validateMove(Point newHead
+    ) {
         return null;
     }
 }
