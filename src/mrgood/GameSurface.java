@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mr.good;
+package mrgood;
 
+import audio.AudioPlayer;
 import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
@@ -12,13 +13,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.List;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.util.AbstractList;
 import java.util.ArrayList;
-import javafx.stage.Screen;
-import static javax.sound.midi.ShortMessage.START;
-import static mr.good.OopsScreen.PLAY;
 
 /**
  *
@@ -35,29 +35,27 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 //    private ArrayList<Item> items;
     private int score;
     private int Health;
-//    private final Screen screen = Screen.START;
+    private Screen screen;
 
     public GameSurface() {
+        this.screen = screen.START;
         Health = 100;
         grid = new Grid(7, 7, 60, 60, new Point(50, 50), new Color(220, 220, 220));
-//        barrier = new Barrier(0, 0, Color.BLACK, this);
-        
-        
-        Color translucentGrey = new Color(64, 64, 64, 100);
-        
+
+        startscreen = ResourceTools.loadImageFromResource("mrgood/boulderuphill.jpg");
+
+        Color translucentGrey = new Color(64, 64, 64, 150);
+
         barriers = new ArrayList<>();
         for (int column = 0; column < grid.getColumns(); column++) {
             barriers.add(new Barrier(column, 0, translucentGrey, this));
-            barriers.add(new Barrier(column, grid.getRows()-1, translucentGrey, this));
+            barriers.add(new Barrier(column, grid.getRows() - 1, translucentGrey, this));
         }
 
-        for (int row = 1; row < grid.getRows()-1; row++) {
+        for (int row = 1; row < grid.getRows() - 1; row++) {
             barriers.add(new Barrier(0, row, translucentGrey, this));
             barriers.add(new Barrier(6, row, translucentGrey, this));
         }
-
-
-//        startscreen = ResourceTools.loadImageFromResource("MrGoodStartscreen.jpg");
 
     }
 
@@ -79,6 +77,10 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     @Override
     public void keyPressedHandler(KeyEvent e) {
+
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            screen = Screen.PLAY;
+        }
     }
 
     @Override
@@ -94,40 +96,62 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         if (grid != null) {
             grid.paintComponent(graphics);
         }
-        
+
         if (barriers != null) {
-            for (Barrier b : barriers){
+            for (Barrier b : barriers) {
                 b.draw(graphics);
             }
         }
-        
+
+        switch (screen) {
+            case START:
+                graphics.setFont(new Font("ARIAL", Font.BOLD, 25));
+                graphics.drawImage(startscreen, 0, 0, 900, 580, this);
+                graphics.drawString("PRESS SPACE TO START", 475, 515);
+
+                break;
+
+            case PLAY:
+
+                if (grid != null) {
+                    grid.paintComponent(graphics);
+                }
+
+                if (barriers != null) {
+                    for (int i = 0; i < barriers.size(); i++) {
+                        barriers.get(i).draw(graphics);
+                    }
+                }
+
+        }
+
     }
 
-//<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
     @Override
     public int getCellWidth() {
         return grid.getCellWidth();
     }
-    
+
     @Override
     public int getCellHeight() {
         return grid.getCellHeight();
     }
-    
+
     @Override
-    public int getSystemCoordX(int column, int row) {
+    public int getSystemCoordX(int column, int row
+    ) {
         return grid.getCellSystemCoordinate(column, row).x;
     }
-    
+
     @Override
-    public int getSystemCoordY(int column, int row) {
+    public int getSystemCoordY(int column, int row
+    ) {
         return grid.getCellSystemCoordinate(column, row).y;
     }
-//</editor-fold>
 
     @Override
-    public Point validateMove(Point newHead) {
+    public Point validateMove(Point newHead
+    ) {
         return null;
     }
-
 }
