@@ -28,6 +28,7 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     Image startscreen;
     Image gameover;
+    Image background;
 
     private Grid grid;
     private Character MrGood;
@@ -44,7 +45,9 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
         startscreen = ResourceTools.loadImageFromResource("mrgood/boulderuphill.jpg");
 
-        Color translucentGrey = new Color(64, 64, 64, 150);
+        background = ResourceTools.loadImageFromResource("mrgood/sandybackground.png");
+
+        Color translucentGrey = new Color(64, 64, 64, 240);
 
         barriers = new ArrayList<>();
         for (int column = 0; column < grid.getColumns(); column++) {
@@ -122,6 +125,7 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
                 break;
 
             case PLAY:
+                graphics.drawImage(background, 0, 0, 1260, 860, this);
 
                 if (grid != null) {
                     grid.paintComponent(graphics);
