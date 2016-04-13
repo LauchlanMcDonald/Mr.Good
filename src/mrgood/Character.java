@@ -43,19 +43,29 @@ public class Character {
     public void move(Direction direction) {
         switch (direction) {
             case LEFT:
-                column--;
+
+                if (column > cellData.getMinColumn()) {
+                    column--;
+                }
                 break;
 
             case RIGHT:
-                column++;
+
+                if (column < cellData.getMaxColumn()) {
+                    column++;
+                }
                 break;
 
             case DOWN:
-                row++;
+                if (row < cellData.getMaxRow()) {
+                    row++;
+                }
                 break;
 
             case UP:
-                row--;
+                if (row > cellData.getMinRow()) {
+                    row--;
+                }
                 break;
         }
     }
