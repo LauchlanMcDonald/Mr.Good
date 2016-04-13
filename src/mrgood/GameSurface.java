@@ -40,7 +40,7 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
     public GameSurface() {
         this.screen = screen.START;
         Health = 100;
-        grid = new Grid(7, 7, 60, 60, new Point(50, 50), new Color(220, 220, 220));
+        grid = new Grid(8, 8, 60, 60, new Point(200, 40), new Color(220, 220, 220));
 
         startscreen = ResourceTools.loadImageFromResource("mrgood/boulderuphill.jpg");
 
@@ -54,8 +54,10 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
         for (int row = 1; row < grid.getRows() - 1; row++) {
             barriers.add(new Barrier(0, row, translucentGrey, this));
-            barriers.add(new Barrier(6, row, translucentGrey, this));
+            barriers.add(new Barrier(7, row, translucentGrey, this));
         }
+
+        MrGood = new Caveman(3, 3, this);
 
     }
 
@@ -81,6 +83,18 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             screen = Screen.PLAY;
         }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            MrGood.move(Direction.LEFT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            MrGood.move(Direction.RIGHT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            MrGood.move(Direction.DOWN);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            MrGood.move(Direction.UP);
+        }
     }
 
     @Override
@@ -93,21 +107,17 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     @Override
     public void paintEnvironment(Graphics graphics) {
-        if (grid != null) {
-            grid.paintComponent(graphics);
-        }
-
-        if (barriers != null) {
-            for (Barrier b : barriers) {
-                b.draw(graphics);
-            }
-        }
 
         switch (screen) {
             case START:
                 graphics.setFont(new Font("ARIAL", Font.BOLD, 25));
                 graphics.drawImage(startscreen, 0, 0, 900, 580, this);
+                graphics.setColor(Color.GRAY);
                 graphics.drawString("PRESS SPACE TO START", 475, 515);
+
+                graphics.setFont(new Font("ARIAL", Font.BOLD, 80));
+                graphics.setColor(Color.WHITE);
+                graphics.drawString("Mr.Good", 35, 115);
 
                 break;
 
@@ -122,6 +132,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
                         barriers.get(i).draw(graphics);
                     }
                 }
+
+                if (MrGood != null) {
+                    MrGood.draw(graphics);
+                }
+
+                break;
 
         }
 
