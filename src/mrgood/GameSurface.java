@@ -147,31 +147,58 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     }
 
+//<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
     @Override
     public int getCellWidth() {
         return grid.getCellWidth();
     }
-
+    
     @Override
     public int getCellHeight() {
         return grid.getCellHeight();
     }
-
+    
     @Override
     public int getSystemCoordX(int column, int row
     ) {
         return grid.getCellSystemCoordinate(column, row).x;
     }
-
+    
     @Override
     public int getSystemCoordY(int column, int row
     ) {
         return grid.getCellSystemCoordinate(column, row).y;
     }
+    
+    @Override
+    public int getMinRow() {
+        return 1;
+    }
+    
+    @Override
+    public int getMaxRow() {
+        return grid.getRows() - 2;
+    }
+    
+    @Override
+    public int getMinColumn() {
+        return 1;
+    }
+    
+    @Override
+    public int getMaxColumn() {
+        return grid.getColumns() -2;
+       }
+//</editor-fold>
 
+//<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
     @Override
     public Point validateMove(Point newHead
     ) {
         return null;
     }
+//</editor-fold>
+    
+
+
 }

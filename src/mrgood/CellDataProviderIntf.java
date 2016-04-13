@@ -16,5 +16,12 @@ public interface CellDataProviderIntf {
     
     public int getSystemCoordX(int column, int row);
     public int getSystemCoordY(int column, int row);
+    
+    public int getMinRow();
+    public int getMaxRow();
+    
+    public int getMinColumn();
+    public int getMaxColumn();
+    
         
 }
