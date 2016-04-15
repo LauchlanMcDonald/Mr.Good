@@ -5,21 +5,19 @@
  */
 package mr.good;
 
-import environment.ApplicationStarter;
 import grid.Grid;
+import images.ResourceTools;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
  * @author Lauchlan
  */
-public class MrGood {
+public class Character {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        ApplicationStarter.run("Mr. Good", new GameSurface());
-    }
-
-
+    
 }
