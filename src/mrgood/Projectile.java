@@ -6,6 +6,7 @@
 package mrgood;
 
 import java.awt.Color;
+import java.awt.Image;
 
 /**
  *
@@ -13,9 +14,11 @@ import java.awt.Color;
  */
 public class Projectile {
 
+    Projectile(int column, int i, Color translucentGrey, GameSurface aThis, Image image) {
+
+    }
+
     Projectile(int column, int i, Color translucentGrey, GameSurface aThis) {
     }
-    
-    
-    
+
 }
