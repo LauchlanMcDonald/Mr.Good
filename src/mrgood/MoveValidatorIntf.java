@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mr.good;
+package mrgood;
+
+import java.awt.Point;
 
 /**
  *
  * @author Lauchlan
  */
-public enum OopsScreen {
-    START, PLAY, GAMEOVER;
+interface MoveValidatorIntf {
+
+    public Point validateMove(Point newHead);
     
 }

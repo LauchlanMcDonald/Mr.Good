@@ -3,21 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mr.good;
+package mrgood;
 
-import grid.Grid;
 import images.ResourceTools;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Point;
-import java.util.ArrayList;
 
 /**
  *
  * @author Lauchlan
  */
-public class Character {
+public class Caveman extends Character {
 
+    public Caveman(int column, int row, CellDataProviderIntf cellData) {
+        super(column, row, cellData);
+        setImage(ResourceTools.loadImageFromResource("mrgood/caveman_stand_right.png"));
+    }
     
 }
