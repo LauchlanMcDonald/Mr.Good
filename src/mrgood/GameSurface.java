@@ -29,11 +29,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
     Image startscreen;
     Image gameover;
     Image background;
+    Image projectile;
 
     private Grid grid;
     private Character MrGood;
     private ArrayList<Barrier> barriers;
-//    private ArrayList<Item> items;
+    private ArrayList<Projectile> projectiles;
     private int score;
     private int Health;
     private Screen screen;
@@ -47,6 +48,8 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
         background = ResourceTools.loadImageFromResource("mrgood/sandybackground.png");
 
+        projectile = ResourceTools.loadImageFromResource("mrgood/rock.png");
+
         Color translucentGrey = new Color(64, 64, 64, 240);
 
         barriers = new ArrayList<>();
@@ -58,6 +61,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         for (int row = 1; row < grid.getRows() - 1; row++) {
             barriers.add(new Barrier(0, row, translucentGrey, this));
             barriers.add(new Barrier(7, row, translucentGrey, this));
+        }
+
+        projectiles = new ArrayList<>();
+        for (int column = 0; column < grid.getColumns(); column++) {
+            projectiles.add(new Projectile(column, 0, translucentGrey, this));
+            projectiles.add(new Projectile(column, grid.getRows() - 1, translucentGrey, this));
         }
 
         MrGood = new Caveman(3, 3, this);
@@ -152,43 +161,43 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
     public int getCellWidth() {
         return grid.getCellWidth();
     }
-    
+
     @Override
     public int getCellHeight() {
         return grid.getCellHeight();
     }
-    
+
     @Override
     public int getSystemCoordX(int column, int row
     ) {
         return grid.getCellSystemCoordinate(column, row).x;
     }
-    
+
     @Override
     public int getSystemCoordY(int column, int row
     ) {
         return grid.getCellSystemCoordinate(column, row).y;
     }
-    
+
     @Override
     public int getMinRow() {
         return 1;
     }
-    
+
     @Override
     public int getMaxRow() {
         return grid.getRows() - 2;
     }
-    
+
     @Override
     public int getMinColumn() {
         return 1;
     }
-    
+
     @Override
     public int getMaxColumn() {
-        return grid.getColumns() -2;
-       }
+        return grid.getColumns() - 2;
+    }
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
@@ -198,7 +207,5 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         return null;
     }
 //</editor-fold>
-    
-
 
 }

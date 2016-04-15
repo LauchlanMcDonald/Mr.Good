@@ -19,7 +19,6 @@ import java.util.ArrayList;
  */
 public class Character {
 
-//    private final Image 
     public Character(int column, int row, CellDataProviderIntf cellData) {
         this.column = column;
         this.row = row;
