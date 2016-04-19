@@ -64,9 +64,16 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         }
 
         projectiles = new ArrayList<>();
-        for (int column = 0; column < grid.getColumns(); column++) {
-            projectiles.add(new Projectile(column, 0, translucentGrey, this));
-            projectiles.add(new Projectile(column, grid.getRows() - 1, translucentGrey, this));
+        for (int column = 1; column < grid.getColumns()-2; column++) {
+            if (Math.random() <.33) {
+                projectiles.add(new Projectile(column, Projectile.IGNORE_COL_OR_ROW, Projectile.SPEED_SLOW, this));
+            }
+        }
+
+        for (int row = 1; row < grid.getRows()-2; row++) {
+            if (Math.random() <.33) {
+                projectiles.add(new Projectile(Projectile.IGNORE_COL_OR_ROW, row, Projectile.SPEED_SLOW, this));
+            }
         }
 
         MrGood = new Caveman(3, 3, this);
@@ -87,6 +94,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     @Override
     public void timerTaskHandler() {
+        
+        if (screen == Screen.PLAY) {
+            for (Projectile projectile: projectiles){
+                projectile.move();
+            }
+        }
     }
 
     @Override
@@ -143,6 +156,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
                 if (barriers != null) {
                     for (int i = 0; i < barriers.size(); i++) {
                         barriers.get(i).draw(graphics);
+                    }
+                }
+
+                if (projectiles != null) {
+                    for (int i = 0; i < projectiles.size(); i++) {
+                        projectiles.get(i).draw(graphics);
                     }
                 }
 
