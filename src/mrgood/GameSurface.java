@@ -29,11 +29,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
     Image startscreen;
     Image gameover;
     Image background;
+    Image projectile;
 
     private Grid grid;
     private Character MrGood;
     private ArrayList<Barrier> barriers;
-//    private ArrayList<Item> items;
+    private ArrayList<Projectile> projectiles;
     private int score;
     private int Health;
     private Screen screen;
@@ -47,6 +48,8 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
         background = ResourceTools.loadImageFromResource("mrgood/sandybackground.png");
 
+        projectile = ResourceTools.loadImageFromResource("mrgood/rock.png");
+
         Color translucentGrey = new Color(64, 64, 64, 240);
 
         barriers = new ArrayList<>();
@@ -58,6 +61,19 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         for (int row = 1; row < grid.getRows() - 1; row++) {
             barriers.add(new Barrier(0, row, translucentGrey, this));
             barriers.add(new Barrier(7, row, translucentGrey, this));
+        }
+
+        projectiles = new ArrayList<>();
+        for (int column = 1; column < grid.getColumns()-2; column++) {
+            if (Math.random() <.33) {
+                projectiles.add(new Projectile(column, Projectile.IGNORE_COL_OR_ROW, Projectile.SPEED_SLOW, this));
+            }
+        }
+
+        for (int row = 1; row < grid.getRows()-2; row++) {
+            if (Math.random() <.33) {
+                projectiles.add(new Projectile(Projectile.IGNORE_COL_OR_ROW, row, Projectile.SPEED_SLOW, this));
+            }
         }
 
         MrGood = new Caveman(3, 3, this);
@@ -78,6 +94,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     @Override
     public void timerTaskHandler() {
+        
+        if (screen == Screen.PLAY) {
+            for (Projectile projectile: projectiles){
+                projectile.move();
+            }
+        }
     }
 
     @Override
@@ -137,6 +159,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
                     }
                 }
 
+                if (projectiles != null) {
+                    for (int i = 0; i < projectiles.size(); i++) {
+                        projectiles.get(i).draw(graphics);
+                    }
+                }
+
                 if (MrGood != null) {
                     MrGood.draw(graphics);
                 }
@@ -152,43 +180,43 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
     public int getCellWidth() {
         return grid.getCellWidth();
     }
-    
+
     @Override
     public int getCellHeight() {
         return grid.getCellHeight();
     }
-    
+
     @Override
     public int getSystemCoordX(int column, int row
     ) {
         return grid.getCellSystemCoordinate(column, row).x;
     }
-    
+
     @Override
     public int getSystemCoordY(int column, int row
     ) {
         return grid.getCellSystemCoordinate(column, row).y;
     }
-    
+
     @Override
     public int getMinRow() {
         return 1;
     }
-    
+
     @Override
     public int getMaxRow() {
         return grid.getRows() - 2;
     }
-    
+
     @Override
     public int getMinColumn() {
         return 1;
     }
-    
+
     @Override
     public int getMaxColumn() {
-        return grid.getColumns() -2;
-       }
+        return grid.getColumns() - 2;
+    }
 //</editor-fold>
 
 //<editor-fold defaultstate="collapsed" desc="MoveValidatorIntf">
@@ -198,7 +226,5 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         return null;
     }
 //</editor-fold>
-    
-
 
 }
