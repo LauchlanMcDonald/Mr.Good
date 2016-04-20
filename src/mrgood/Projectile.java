@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * @author Lauchlan
  */
 class Projectile {
-    
+
     public static final int IGNORE_COL_OR_ROW = -1;
 
     public static final int SPEED_SLOWEST = 1;
@@ -27,7 +27,10 @@ class Projectile {
     public static final int SPEED_FAST = 4;
     public static final int SPEED_FASTEST = 5;
     public static final int SPEED_INSANE = 7;
-    
+    private boolean Direction;
+    private int y;
+    private int x;
+
     public Projectile(int column, int row, int speed, CellDataProviderIntf cellData) {
 
         this.column = column;
@@ -37,32 +40,29 @@ class Projectile {
         this.cellData = cellData;
     }
 
-    public void draw(Graphics graphics){
+    public void draw(Graphics graphics) {
         graphics.setColor(Color.RED);
-        
-        
+
         if (row == IGNORE_COL_OR_ROW) {
-            graphics.fillOval(cellData.getSystemCoordX(column, 0), 
-                              cellData.getSystemCoordY(column, 0), 
-                              cellData.getCellWidth(), 
-                              cellData.getCellHeight());
+            graphics.fillOval(cellData.getSystemCoordX(column, 0),
+                    cellData.getSystemCoordY(column, 0),
+                    cellData.getCellWidth(),
+                    cellData.getCellHeight());
         } else if (column == IGNORE_COL_OR_ROW) {
-            graphics.fillOval(cellData.getSystemCoordX(0, row), 
-                              cellData.getSystemCoordY(0, row), 
-                              cellData.getCellWidth(), 
-                              cellData.getCellHeight());
+            graphics.fillOval(cellData.getSystemCoordX(0, row),
+                    cellData.getSystemCoordY(0, row),
+                    cellData.getCellWidth(),
+                    cellData.getCellHeight());
         }
 
     }
-    
-    
+
     //<editor-fold defaultstate="collapsed" desc="Properties">
     private int column, row, speed;
     private Color color;
     private Image image;
-    
+
     private CellDataProviderIntf cellData;
-    
 
     /**
      * @return the column
@@ -135,14 +135,49 @@ class Projectile {
     }
 //</editor-fold>
 
-    void move() {
-        if (row == IGNORE_COL_OR_ROW) {
-            
-            
-            
-        } else {
-            //will move horizontally
+    public void move(Direction direction) {
+                switch (direction) {
+            case LEFT:
+
+                if (column == cellData.getMinColumn()) {
+                    x = x + SPEED_INSANE;
+                }
+                break;
+
+            case RIGHT:
+
+                if (column == cellData.getMaxColumn()) {
+                    x = x - SPEED_INSANE;
+                }
+                break;
+
+            case DOWN:
+                if (row == cellData.getMaxRow()) {
+                    y = y - SPEED_INSANE;
+                }
+                break;
+
+            case UP:
+                if (row == cellData.getMinRow()) {
+                    y = y + SPEED_INSANE;
+                }
+                break;
         }
+
+
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    void move() {
+    }
 }
+
+
