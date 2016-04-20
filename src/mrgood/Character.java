@@ -73,7 +73,7 @@ public class Character {
     private int column, row;
     private CellDataProviderIntf cellData;
     private Image image;
-
+    private int x, y;
     /**
      * @return the column
      */

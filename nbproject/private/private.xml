@@ -3,11 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/Barrier.java</file>
             <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/CellDataProviderIntf.java</file>
-            <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/Character.java</file>
+            <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/ProjectileDirection.java</file>
             <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/GameSurface.java</file>
             <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/Projectile.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/Users/samuelmartinezdelcampo/NetBeansProjects/Mr.Good/src/mr/good/MrGood.java</file>
+=======
+            <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/Character.java</file>
+            <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/GameSurface.java</file>
+            <file>file:/Users/Lauchlan/NetBeansProjects/Mr.Good/src/mrgood/Caveman.java</file>
+>>>>>>> origin/master
+>>>>>>> origin/master
         </group>
     </open-files>
 </project-private>
