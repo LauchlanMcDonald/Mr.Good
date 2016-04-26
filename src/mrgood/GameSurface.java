@@ -64,18 +64,34 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
             barriers.add(new Barrier(7, row, translucentGrey, this));
         }
 //
-//        projectiles = new ArrayList<>();
-//        for (int column = 1; column < grid.getColumns()-2; column++) {
-//            if (Math.random() <.33) {
-//                projectiles.add(new Projectile(column, Projectile.IGNORE_COL_OR_ROW, Projectile.SPEED_SLOW, this));
-//            }
-//        }
-//
-//        for (int row = 1; row < grid.getRows()-2; row++) {
-//            if (Math.random() <.33) {
-//                projectiles.add(new Projectile(Projectile.IGNORE_COL_OR_ROW, row, Projectile.SPEED_SLOW, this));
-//            }
-//        }
+        projectiles = new ArrayList<>();
+        // Topmost row , moving down
+        for (int column = 1; column < grid.getColumns() - 2; column++) {
+            if (Math.random() < .33) {
+                projectiles.add(new Projectile(column, 0, Projectile.SPEED_SLOW, this, Direction.DOWN));
+            }
+        }
+
+        // Column 0, moving right
+        for (int row = 1; row < grid.getRows() - 2; row++) {
+            if (Math.random() < .33) {
+                projectiles.add(new Projectile(0, row, Projectile.SPEED_SLOW, this, Direction.RIGHT));
+            }
+        }
+
+        // Rightmost Column 0, moving left
+        for (int row = 1; row < grid.getRows() - 2; row++) {
+            if (Math.random() < .33) {
+                projectiles.add(new Projectile(grid.getColumns() - 1, row, Projectile.SPEED_SLOW, this, Direction.LEFT));
+            }
+        }
+        
+        // Topmost row , moving down
+        for (int column = 1; column < grid.getColumns() - 2; column++) {
+            if (Math.random() < .33) {
+                projectiles.add(new Projectile(column, grid.getRows() -1, Projectile.SPEED_SLOW, this, Direction.UP));
+            }
+        }
 
         MrGood = new Caveman(3, 3, this);
 
@@ -95,9 +111,9 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
 
     @Override
     public void timerTaskHandler() {
-        
+
         if (screen == Screen.PLAY) {
-            for (Projectile projectile: projectiles){
+            for (Projectile projectile : projectiles) {
                 projectile.move();
             }
         }
