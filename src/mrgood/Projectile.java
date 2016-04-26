@@ -27,70 +27,39 @@ class Projectile {
     public static final int SPEED_FAST = 4;
     public static final int SPEED_FASTEST = 5;
     public static final int SPEED_INSANE = 7;
-    private boolean Direction;
-    private int y;
-    private int x;
 
-    public Projectile(int column, int row, int speed, CellDataProviderIntf cellData) {
+    public Projectile(int column, int row, int speed, CellDataProviderIntf cellData, Direction direction) {
+        //figure out initial position (x, y) from column and row
+        this.x = cellData.getSystemCoordX(column, row);
+        this.y = cellData.getSystemCoordY(column, row);
 
-        this.column = column;
-        this.row = row;
         this.speed = speed;
+        this.direction = direction;
 
         this.cellData = cellData;
     }
 
     public void draw(Graphics graphics) {
         graphics.setColor(Color.RED);
-
-        if (row == IGNORE_COL_OR_ROW) {
-            graphics.fillOval(cellData.getSystemCoordX(column, 0),
-                    cellData.getSystemCoordY(column, 0),
-                    cellData.getCellWidth(),
-                    cellData.getCellHeight());
-        } else if (column == IGNORE_COL_OR_ROW) {
-            graphics.fillOval(cellData.getSystemCoordX(0, row),
-                    cellData.getSystemCoordY(0, row),
-                    cellData.getCellWidth(),
-                    cellData.getCellHeight());
-        }
-
+        graphics.fillOval(x, y, getCellData().getCellWidth(), getCellData().getCellHeight());      
     }
+    
+    
+//    public Point getCentreOfMass(){
+//        return new Point(x + cellData.getCellWidth());
+//    }
 
     //<editor-fold defaultstate="collapsed" desc="Properties">
-    private int column, row, speed;
+//    private int column, row, speed;
+    private int y;
+    private int x;
+    private Direction direction;
+
+    private int speed;
     private Color color;
     private Image image;
 
     private CellDataProviderIntf cellData;
-
-    /**
-     * @return the column
-     */
-    public int getColumn() {
-        return column;
-    }
-
-    /**
-     * @param column the column to set
-     */
-    public void setColumn(int column) {
-        this.column = column;
-    }
-
-    /**
-     * @return the row
-     */
-    public int getRow() {
-        return row;
-    }
-
-    /**
-     * @param row the row to set
-     */
-    public void setRow(int row) {
-        this.row = row;
-    }
 
     /**
      * @return the color
@@ -133,51 +102,46 @@ class Projectile {
     public void setCellData(CellDataProviderIntf cellData) {
         this.cellData = cellData;
     }
+
+    /**
+     * @return the direction
+     */
+    public Direction getDirection() {
+        return direction;
+    }
+
+    /**
+     * @param direction the direction to set
+     */
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    /**
+     * @param speed the speed to set
+     */
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 //</editor-fold>
 
-    public void move(Direction direction) {
-                switch (direction) {
+    public void move() {
+        switch (direction) {
             case LEFT:
-
-                if (column == cellData.getMinColumn()) {
-                    x = x + SPEED_INSANE;
-                }
+                x -= speed;
                 break;
 
             case RIGHT:
-
-                if (column == cellData.getMaxColumn()) {
-                    x = x - SPEED_INSANE;
-                }
+                x += speed;
                 break;
 
             case DOWN:
-                if (row == cellData.getMaxRow()) {
-                    y = y - SPEED_INSANE;
-                }
+                y += speed;
                 break;
 
             case UP:
-                if (row == cellData.getMinRow()) {
-                    y = y + SPEED_INSANE;
-                }
+                y -= speed;
                 break;
         }
-
-
-    }
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    void move() {
     }
 }
-
-
