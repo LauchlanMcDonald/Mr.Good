@@ -68,28 +68,28 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         // Topmost row , moving down
         for (int column = 1; column < grid.getColumns() - 2; column++) {
             if (Math.random() < .33) {
-                projectiles.add(new Projectile(column, 0, Projectile.SPEED_SLOW, this, Direction.DOWN));
+                projectiles.add(new Projectile(column, 0, Projectile.SPEED_SLOW, this, Direction.DOWN, projectile));
             }
         }
 
         // Column 0, moving right
         for (int row = 1; row < grid.getRows() - 2; row++) {
             if (Math.random() < .33) {
-                projectiles.add(new Projectile(0, row, Projectile.SPEED_SLOW, this, Direction.RIGHT));
+                projectiles.add(new Projectile(0, row, Projectile.SPEED_SLOW, this, Direction.RIGHT, projectile));
             }
         }
 
         // Rightmost Column 0, moving left
         for (int row = 1; row < grid.getRows() - 2; row++) {
             if (Math.random() < .33) {
-                projectiles.add(new Projectile(grid.getColumns() - 1, row, Projectile.SPEED_SLOW, this, Direction.LEFT));
+                projectiles.add(new Projectile(grid.getColumns() - 1, row, Projectile.SPEED_SLOW, this, Direction.LEFT, projectile));
             }
         }
         
         // Topmost row , moving down
         for (int column = 1; column < grid.getColumns() - 2; column++) {
             if (Math.random() < .33) {
-                projectiles.add(new Projectile(column, grid.getRows() -1, Projectile.SPEED_SLOW, this, Direction.UP));
+                projectiles.add(new Projectile(column, grid.getRows() -1, Projectile.SPEED_SLOW, this, Direction.UP, projectile));
             }
         }
 

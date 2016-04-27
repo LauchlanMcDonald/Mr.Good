@@ -28,7 +28,7 @@ class Projectile {
     public static final int SPEED_FASTEST = 5;
     public static final int SPEED_INSANE = 7;
 
-    public Projectile(int column, int row, int speed, CellDataProviderIntf cellData, Direction direction) {
+    public Projectile(int column, int row, int speed, CellDataProviderIntf cellData, Direction direction, Image image) {
         //figure out initial position (x, y) from column and row
         this.x = cellData.getSystemCoordX(column, row);
         this.y = cellData.getSystemCoordY(column, row);
@@ -37,17 +37,16 @@ class Projectile {
         this.direction = direction;
 
         this.cellData = cellData;
+
+        this.image = image;
     }
 
     public void draw(Graphics graphics) {
-        graphics.setColor(Color.RED);
-        graphics.fillOval(x, y, getCellData().getCellWidth(), getCellData().getCellHeight());      
+        graphics.drawImage(getImage(), cellData.getSystemCoordX(x, y),
+                cellData.getSystemCoordY(x, y),
+                cellData.getCellWidth(),
+                cellData.getCellHeight(), null);
     }
-    
-    
-//    public Point getCentreOfMass(){
-//        return new Point(x + cellData.getCellWidth());
-//    }
 
     //<editor-fold defaultstate="collapsed" desc="Properties">
 //    private int column, row, speed;
