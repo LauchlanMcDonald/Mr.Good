@@ -85,11 +85,11 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
                 projectiles.add(new Projectile(grid.getColumns() - 1, row, Projectile.SPEED_SLOW, this, Direction.LEFT, projectile));
             }
         }
-        
+
         // Topmost row , moving down
         for (int column = 1; column < grid.getColumns() - 2; column++) {
             if (Math.random() < .33) {
-                projectiles.add(new Projectile(column, grid.getRows() -1, Projectile.SPEED_SLOW, this, Direction.UP, projectile));
+                projectiles.add(new Projectile(column, grid.getRows() - 1, Projectile.SPEED_SLOW, this, Direction.UP, projectile));
             }
         }
 
@@ -191,6 +191,12 @@ public class GameSurface extends Environment implements CellDataProviderIntf, Mo
         }
 
     }
+
+//    public void resetBalls() {
+//        if (projectiles. = -1) {
+//
+//        }
+//    }
 
 //<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
     @Override

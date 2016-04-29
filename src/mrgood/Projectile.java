@@ -42,10 +42,8 @@ class Projectile {
     }
 
     public void draw(Graphics graphics) {
-        graphics.drawImage(getImage(), cellData.getSystemCoordX(x, y),
-                cellData.getSystemCoordY(x, y),
-                cellData.getCellWidth(),
-                cellData.getCellHeight(), null);
+        graphics.setColor(Color.RED);
+        graphics.fillOval(x, y, cellData.getCellWidth(), cellData.getCellHeight());
     }
 
     //<editor-fold defaultstate="collapsed" desc="Properties">
@@ -143,4 +141,8 @@ class Projectile {
                 break;
         }
     }
+    
+    
+
+    
 }
